@@ -593,58 +593,59 @@ public class Wait {
     }
 
     public WebElement forElementBeingVisible(WebElement element) {
-        return new WebDriverWait(driver, DEFAULT_TIMEOUT_MILLISECONDS, TimeUnit.MILLISECONDS, DEFAULT_SLEEP_MILLISECONDS)
+        return new WebDriverWait(driver, DEFAULT_TIMEOUT_MILLISECONDS / 1000, DEFAULT_SLEEP_MILLISECONDS)
                 .until(ExpectedConditions.visibilityOf(element));
     }
 
     public WebElement forElementBeingPresentPageLoadingTimeout(By by) {
-        return new WebDriverWait(driver, TIMEOUT_PAGE_LOADING_MILLISECONDS, TimeUnit.MILLISECONDS, DEFAULT_SLEEP_MILLISECONDS)
+        return new WebDriverWait(driver, TIMEOUT_PAGE_LOADING_MILLISECONDS / 1000, DEFAULT_SLEEP_MILLISECONDS)
                 .until(ExpectedConditions.presenceOfElementLocated(by));
     }
 
     public WebElement forElementBeingPresentDefaultTimeout(By by){
-        return new WebDriverWait(driver, DEFAULT_TIMEOUT_MILLISECONDS, TimeUnit.MILLISECONDS, DEFAULT_SLEEP_MILLISECONDS)
+        return new WebDriverWait(driver, DEFAULT_TIMEOUT_MILLISECONDS / 1000, DEFAULT_SLEEP_MILLISECONDS)
                 .until(ExpectedConditions.presenceOfElementLocated(by));
     }
 
     public WebElement forElementWhosePropertyDisappears(WebElement webElement, String attributeName, String defaultValueAttribute){
-        return new WebDriverWait(driver, DEFAULT_TIMEOUT_MILLISECONDS, TimeUnit.MILLISECONDS, DEFAULT_SLEEP_MILLISECONDS)
+        return new WebDriverWait(driver, DEFAULT_TIMEOUT_MILLISECONDS / 1000, DEFAULT_SLEEP_MILLISECONDS)
                 .until(new ExpectedConditionPropertyThatDisappears(webElement, attributeName, defaultValueAttribute));
     }
 
     public WebElement forElementWhosePropertyDisappears(By by, String attributeName, String defaultValueAttribute){
-        return new WebDriverWait(driver, DEFAULT_TIMEOUT_MILLISECONDS, TimeUnit.MILLISECONDS, DEFAULT_SLEEP_MILLISECONDS)
+        return new WebDriverWait(driver, DEFAULT_TIMEOUT_MILLISECONDS / 1000, DEFAULT_SLEEP_MILLISECONDS)
                 .until(new ExpectedConditionPropertyThatDisappears(by, attributeName, defaultValueAttribute));
     }
 
+    // I don't know what unit this timeout is in
     public WebElement forElementThatChangesProperty(WebElement webElement, String attributeName, String expectedValueAttribute, int timeout){
-        return new WebDriverWait(driver, timeout, TimeUnit.MILLISECONDS, DEFAULT_SLEEP_MILLISECONDS)
+        return new WebDriverWait(driver, timeout / 1000, DEFAULT_SLEEP_MILLISECONDS)
                 .until(new ExpectedConditionPropertyThatChanges(webElement, attributeName, expectedValueAttribute));
     }
 
     public WebElement forElementThatChangesProperty(WebElement webElement, String attributeName, String expectedValueAttribute){
-        return new WebDriverWait(driver, DEFAULT_TIMEOUT_MILLISECONDS, TimeUnit.MILLISECONDS, DEFAULT_SLEEP_MILLISECONDS)
+        return new WebDriverWait(driver, DEFAULT_TIMEOUT_MILLISECONDS / 1000, DEFAULT_SLEEP_MILLISECONDS)
                 .until(new ExpectedConditionPropertyThatChanges(webElement, attributeName, expectedValueAttribute));
     }
 
     public WebElement forElementThatChangesProperty(By by, String attributeName, String expectedValueAttribute, int timeout){
-        return new WebDriverWait(driver, timeout, TimeUnit.MILLISECONDS, DEFAULT_SLEEP_MILLISECONDS)
+        return new WebDriverWait(driver, timeout / 1000, DEFAULT_SLEEP_MILLISECONDS)
                 .until(new ExpectedConditionPropertyThatChanges(by, attributeName, expectedValueAttribute));
     }
 
     public WebElement forElementThatChangesProperty(By by, String attributeName, String expectedValueAttribute){
-        return new WebDriverWait(driver, DEFAULT_TIMEOUT_MILLISECONDS, TimeUnit.MILLISECONDS, DEFAULT_SLEEP_MILLISECONDS)
+        return new WebDriverWait(driver, DEFAULT_TIMEOUT_MILLISECONDS / 1000, DEFAULT_SLEEP_MILLISECONDS)
                 .until(new ExpectedConditionPropertyThatChanges(by, attributeName, expectedValueAttribute));
     }
 
     public WebElement forElementThatChangesText(By by, boolean textExpected, String text){
-        return new WebDriverWait(driver, DEFAULT_TIMEOUT_MILLISECONDS, TimeUnit.MILLISECONDS, DEFAULT_SLEEP_MILLISECONDS)
+        return new WebDriverWait(driver, DEFAULT_TIMEOUT_MILLISECONDS / 1000, DEFAULT_SLEEP_MILLISECONDS)
                 .until(new ExpectedConditionTextThatChanges(by, textExpected, text));
     }
 
     //to be tested in ES
     public WebElement forElementBeingClickable(By by){
-        return new WebDriverWait(driver, DEFAULT_TIMEOUT_MILLISECONDS, TimeUnit.MILLISECONDS, DEFAULT_SLEEP_MILLISECONDS)
+        return new WebDriverWait(driver, DEFAULT_TIMEOUT_MILLISECONDS / 1000, DEFAULT_SLEEP_MILLISECONDS)
                 .until(new ExpectedConditionElementToBeClickable(by));
     }
 

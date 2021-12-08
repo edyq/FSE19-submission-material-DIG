@@ -6,4 +6,4 @@ evosuite_cp="$HOME/.m2/repository/org/evosuite/evosuite-runtime/1.0.4-SNAPSHOT/e
 
 project_cp="target/classes" 
 
-java -Xms4096m -Xmx4096m -cp $evosuite_cp org.evosuite.EvoSuite -projectCP $project_cp $*
+java -Xms2048M -Xmx2048M -cp $evosuite_cp org.evosuite.EvoSuite -projectCP $project_cp $*

@@ -974,7 +974,7 @@ public class BasePageObject {
      */
     public boolean waitForElementBeingInvisibleOnPage(By locator, long timeoutInMs){
         try{
-            wait.forElementBeingInvisible(locator, timeoutInMs, TimeUnit.MILLISECONDS);
+            wait.forElementBeingInvisible(locator, timeoutInMs);
             return true;
         }catch(TimeoutException e){
             PageObjectLogging.logInfo("waitForElementBeingInvisibleOnPage timeout exception: unable to locate the element " + locator.toString());
@@ -1004,10 +1004,20 @@ public class BasePageObject {
      *
      * @return true if element is present, otherwise return false
      */
+    // TODO: find references of this method; not sure what time unit is used
     public boolean waitForElementBeingPresentOnPage(By locator, long timeout, TimeUnit unit){
         try{
-            wait.forElementBeingPresentCustomTimeout(locator, timeout, unit);
-            return true;
+            if (unit == TimeUnit.MILLISECONDS) {
+                wait.forElementBeingPresentCustomTimeout(locator, timeout);
+                return true;
+            } else if (unit == TimeUnit.SECONDS) {
+                wait.forElementBeingPresentCustomTimeout(locator, timeout * 1000);
+                return true;
+            } else {
+                PageObjectLogging.logInfo("TimeUnit " + unit.toString() + " is not accepted. Please use SECONDS or MILLISECONDS");
+                return false;
+            }
+            
         }catch(TimeoutException e){
             PageObjectLogging.logInfo("waitForElementBeingPresentOnPage timeout exception: unable to locate the element " + locator.toString());
             return false;
@@ -1022,7 +1032,7 @@ public class BasePageObject {
      */
     public boolean waitForElementBeingPresentOnPage(By locator, long timeoutInMillis){
         try{
-            wait.forElementBeingPresentCustomTimeout(locator, timeoutInMillis, TimeUnit.MILLISECONDS);
+            wait.forElementBeingPresentCustomTimeout(locator, timeoutInMillis);
             return true;
         }catch(TimeoutException e){
             PageObjectLogging.logInfo("waitForElementBeingPresentOnPage timeout exception: unable to locate the element " + locator.toString());

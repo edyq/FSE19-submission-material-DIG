@@ -569,6 +569,7 @@ public class Wait {
     /*-----------------------------------------------------------------------------------------------------*/
 
 
+    /* commented for testing 
     public boolean forElementBeingInvisible(By by) {
         return new WebDriverWait(driver, TIMEOUT_PAGE_LOADING_MILLISECONDS, TimeUnit.MILLISECONDS).until(
                 ExpectedConditions.invisibilityOfElementLocated(by));
@@ -586,6 +587,31 @@ public class Wait {
 
     public WebElement forElementBeingPresentDefaultTimeout(By by){
         return new WebDriverWait(driver, DEFAULT_TIMEOUT_MILLISECONDS, TimeUnit.MILLISECONDS)
+                .until(ExpectedConditions.presenceOfElementLocated(by));
+    }
+    */
+
+
+    // private static final int DEFAULT_TIMEOUT_MILLISECONDS = 30;
+    // private static final int TIMEOUT_PAGE_LOADING_MILLISECONDS = 4000;
+    
+    public boolean forElementBeingInvisible(By by) {
+        return new WebDriverWait(driver, TIMEOUT_PAGE_LOADING_MILLISECONDS / 1000).until(
+                ExpectedConditions.invisibilityOfElementLocated(by));
+    }
+
+    public WebElement forElementBeingVisible(WebElement element) {
+        return new WebDriverWait(driver, TIMEOUT_PAGE_LOADING_MILLISECONDS / 1000)
+                .until(ExpectedConditions.visibilityOf(element));
+    }
+
+    public WebElement forElementBeingPresentPageLoadingTimeout(By by) {
+        return new WebDriverWait(driver, TIMEOUT_PAGE_LOADING_MILLISECONDS / 1000)
+                .until(ExpectedConditions.presenceOfElementLocated(by));
+    }
+
+    public WebElement forElementBeingPresentDefaultTimeout(By by){
+        return new WebDriverWait(driver, TIMEOUT_PAGE_LOADING_MILLISECONDS / 1000)
                 .until(ExpectedConditions.presenceOfElementLocated(by));
     }
 

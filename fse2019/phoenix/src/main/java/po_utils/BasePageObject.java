@@ -940,8 +940,16 @@ public class BasePageObject {
      */
     public boolean waitForElementBeingPresentOnPage(By locator, long timeout, TimeUnit unit){
         try{
-            wait.forElementBeingPresentCustomTimeout(locator, timeout, unit);
-            return true;
+            if (unit == TimeUnit.MILLISECONDS) {
+                wait.forElementBeingPresentCustomTimeout(locator, timeout);
+                return true;
+            } else if (unit == TimeUnit.SECONDS) {
+                wait.forElementBeingPresentCustomTimeout(locator, timeout * 1000);
+                return true;
+            } else {
+                PageObjectLogging.logInfo("TimeUnit " + unit.toString() + " is not accepted. Please use SECONDS or MILLISECONDS");
+                return false;
+            }
         }catch(TimeoutException e){
             PageObjectLogging.logInfo("waitForElementBeingPresentOnPage timeout exception: unable to locate the element " + locator.toString());
             return false;
@@ -950,7 +958,7 @@ public class BasePageObject {
 
     public boolean waitForElementBeingPresentOnPage(By locator, long timeout){
         try{
-            wait.forElementBeingPresentCustomTimeout(locator, timeout, TimeUnit.MILLISECONDS);
+            wait.forElementBeingPresentCustomTimeout(locator, timeout);
             return true;
         }catch(TimeoutException e){
             PageObjectLogging.logInfo("waitForElementBeingPresentOnPage timeout exception: unable to locate the element " + locator.toString());
